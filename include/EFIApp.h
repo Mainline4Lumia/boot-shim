@@ -15,7 +15,6 @@
 #endif
 
 /* low level macros for accessing memory mapped hardware registers */
-#define REG64(addr) ((volatile uint64_t *)(addr))
 #define REG32(addr) ((volatile uint32_t *)(addr))
 #define REG16(addr) ((volatile uint16_t *)(addr))
 #define REG8(addr) ((volatile uint8_t *)(addr))
@@ -30,20 +29,12 @@
 
 #define GIC_DIST_CTRL               GIC_DIST_REG(0x000)
 
-BOOLEAN CheckElf64Header(Elf64_Ehdr * bl_elf_hdr);
-VOID JumpToAddressAArch64(
+BOOLEAN CheckElf32Header(Elf32_Ehdr* header);
+VOID JumpToAddress(
 	EFI_HANDLE ImageHandle,
-	EFI_PHYSICAL_ADDRESS Address,
+	EFI_PHYSICAL_ADDRESS JumpAddress,
 	VOID* PayloadBuffer,
-	UINT64 PayloadLength
-);
-
-VOID JumpToAddressAArch32(
-	EFI_HANDLE ImageHandle,
-	EFI_PHYSICAL_ADDRESS AArch32Address,
-	EFI_PHYSICAL_ADDRESS AArch64Address,
-	VOID* AArch64PayloadBuffer,
-	UINT64 AArch64PayloadLength
+	UINT32 PayloadLength
 );
 
 #endif

@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}</ProjectGuid>
     <RootNamespace>uefi-simple</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>BootShim</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -23,14 +23,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WindowsSDKDesktopARMSupport>true</WindowsSDKDesktopARMSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WindowsSDKDesktopARMSupport>true</WindowsSDKDesktopARMSupport>
   </PropertyGroup>
@@ -97,9 +97,11 @@
       <Command>armasm -32 $(ProjectDir)..\..\src\ARM\ProcessorSupport.asm $(IntermediateOutputPath)ProcessorSupport.obj</Command>
       <Message>Generate ARM32 support assembly object</Message>
     </PreBuildEvent>
+    <!--
     <PostBuildEvent>
       <Command>signtool.exe sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /sm /sha1 5d7630097be5bdb731fc40cd4998b69914d82ead $(OutDir)*.efi</Command>
     </PostBuildEvent>
+    -->
     <PostBuildEvent>
       <Message>Sign binaries</Message>
     </PostBuildEvent>
@@ -157,12 +159,9 @@
     <ClInclude Include="..\..\include\scm.h" />
     <ClInclude Include="..\..\include\suptypes.h" />
     <ClInclude Include="..\..\include\xplatprimitives.h" />
-    <ClInclude Include="..\..\include\BlBootConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\PreloaderEnvironment.h" />
     <ClCompile Include="..\..\src\BlApplicationEntry.c" />
-    <ClCompile Include="..\..\src\BlBootConfiguration.c" />
     <ClCompile Include="..\..\src\Context.c" />
     <ClCompile Include="..\..\src\EFIApp.c" />
   </ItemGroup>

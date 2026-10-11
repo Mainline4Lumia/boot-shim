@@ -9,8 +9,6 @@ CACHE_LINE		EQU		64
 	AREA s_ArmDeInitialize, CODE, READONLY, ARM
 	EXPORT ArmDeInitialize
 	EXPORT ArmCleanInvalidateCacheRange
-	EXPORT ArmCallSmcHardCoded
-	EXPORT ArmReadCntFrq
 
 ArmDeInitialize
 	; Disable Branch Prediction
@@ -111,24 +109,5 @@ ArmCleanInvalidateCacheRange0
 	dsb
 
 	bx		lr
-
-ArmCallSmcHardCoded
-    ; Load the SMC arguments values into the appropriate registers
-    ldr     r7, =0
-    ldr     r6, =0
-    ldr     r5, =0
-    ldr     r4, =0
-    ldr     r3, =0x50
-    ldr     r2, =0xA0000000
-    ldr     r1, =0x12
-    ldr     r0, =0x0200010f
-
-    smc     #0
-
-    bx      lr
-
-ArmReadCntFrq
-	mrc    p15, 0, r0, c14, c0, 0    ; Read CNTFRQ
-	bx     lr
 
 	END

@@ -4,12 +4,6 @@
 
 #define CACHE_LINE 64
 
-UINTN
-EFIAPI
-ArmReadCntFrq(
-	VOID
-);
-
 extern void ArmDeInitialize(void);
 extern void ArmCleanInvalidateCacheRange(addr_t start, size_t len);
 
